@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Edit2, Trash2, Users, FileText, Settings, ShieldAlert, Database, Loader2, Search, Filter, AlertCircle, CheckCircle2, X, Trophy, Calendar, Percent, BarChart3 } from 'lucide-react';
 import { useStore } from '../../store/useStore';
 import { getQuizzes, Quiz, getUsers, getAllResults, Result } from '../../services/quizService';
-import { collection, getDocs, deleteDoc, doc, setDoc, query, where } from 'firebase/firestore';
+import { collection, getDocs, deleteDoc, doc, setDoc, getDoc, query, where } from 'firebase/firestore';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { db } from '../../firebase';
 import CreateQuizModal from '../../components/admin/CreateQuizModal';
@@ -114,6 +114,27 @@ const AdminDashboard: React.FC = () => {
 
   const fetchAdminData = async () => {
     try {
+      // Migrate old results that are missing userName
+      try {
+        const resultsQuery = query(collection(db, 'results'));
+        const resultsSnapshot = await getDocs(resultsQuery);
+        for (const docSnap of resultsSnapshot.docs) {
+          const data = docSnap.data();
+          if (!data.userName) {
+            const userDoc = await getDoc(doc(db, 'users', data.userId));
+            if (userDoc.exists()) {
+              await setDoc(docSnap.ref, { 
+                ...data, 
+                userName: userDoc.data().name || 'Unknown',
+                userEmail: userDoc.data().email || 'Unknown'
+              });
+            }
+          }
+        }
+      } catch (migrationError) {
+        console.error('Error migrating old results:', migrationError);
+      }
+
       const fetchedQuizzes = await getQuizzes();
       setQuizzes(fetchedQuizzes);
       

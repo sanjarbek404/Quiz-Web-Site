@@ -54,7 +54,9 @@
         "quizId": { "type": "string" },
         "score": { "type": "number" },
         "percentage": { "type": "number" },
-        "completedAt": { "type": "string", "format": "date-time" }
+        "completedAt": { "type": "string", "format": "date-time" },
+        "userName": { "type": "string" },
+        "userEmail": { "type": "string" }
       },
       "required": ["id", "userId", "quizId", "score", "percentage", "completedAt"]
     }

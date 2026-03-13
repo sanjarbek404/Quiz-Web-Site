@@ -27,6 +27,8 @@ export interface Result {
   score: number;
   percentage: number;
   completedAt: string;
+  userName?: string;
+  userEmail?: string;
 }
 
 export const getQuizzes = async (): Promise<Quiz[]> => {
@@ -85,12 +87,14 @@ export const getLeaderboard = async (): Promise<(Result & { userName?: string, q
   const results = snapshot.docs.map(doc => doc.data() as Result);
   
   const enrichedResults = await Promise.all(results.map(async (result) => {
-    let userName = 'Unknown';
+    let userName = result.userName || 'Unknown';
     let quizTitle = 'Unknown Quiz';
     
     try {
-      const userDoc = await getDoc(doc(db, 'users', result.userId));
-      if (userDoc.exists()) userName = userDoc.data().name || 'Unknown';
+      if (!result.userName) {
+        const userDoc = await getDoc(doc(db, 'users', result.userId));
+        if (userDoc.exists()) userName = userDoc.data().name || 'Unknown';
+      }
       
       const quizDoc = await getDoc(doc(db, 'quizzes', result.quizId));
       if (quizDoc.exists()) quizTitle = quizDoc.data().title;
@@ -110,15 +114,17 @@ export const getAllResults = async (): Promise<(Result & { userName?: string, us
   const results = snapshot.docs.map(doc => doc.data() as Result);
   
   const enrichedResults = await Promise.all(results.map(async (result) => {
-    let userName = 'Unknown';
-    let userEmail = 'Unknown';
+    let userName = result.userName || 'Unknown';
+    let userEmail = result.userEmail || 'Unknown';
     let quizTitle = 'Unknown Quiz';
     
     try {
-      const userDoc = await getDoc(doc(db, 'users', result.userId));
-      if (userDoc.exists()) {
-        userName = userDoc.data().name || 'Unknown';
-        userEmail = userDoc.data().email || 'Unknown';
+      if (!result.userName || !result.userEmail) {
+        const userDoc = await getDoc(doc(db, 'users', result.userId));
+        if (userDoc.exists()) {
+          userName = result.userName || userDoc.data().name || 'Unknown';
+          userEmail = result.userEmail || userDoc.data().email || 'Unknown';
+        }
       }
       
       const quizDoc = await getDoc(doc(db, 'quizzes', result.quizId));

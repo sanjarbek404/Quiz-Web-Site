@@ -123,14 +123,16 @@ service cloud.firestore {
 
     function isValidResult() {
       let data = request.resource.data;
-      return hasOnlyAllowedFields(['id', 'userId', 'quizId', 'score', 'percentage', 'completedAt']) &&
+      return hasOnlyAllowedFields(['id', 'userId', 'quizId', 'score', 'percentage', 'completedAt', 'userName', 'userEmail']) &&
              hasRequiredFields(['id', 'userId', 'quizId', 'score', 'percentage', 'completedAt']) &&
              data.id is string && data.id.size() > 0 && data.id.size() < 100 &&
              data.userId is string && data.userId.size() > 0 && data.userId.size() < 100 &&
              data.quizId is string && data.quizId.size() > 0 && data.quizId.size() < 100 &&
              data.score is number && data.score >= 0 &&
              data.percentage is number && data.percentage >= 0 && data.percentage <= 100 &&
-             data.completedAt is string && data.completedAt.size() < 50;
+             data.completedAt is string && data.completedAt.size() < 50 &&
+             (!('userName' in data) || (data.userName is string && data.userName.size() < 100)) &&
+             (!('userEmail' in data) || (data.userEmail is string && data.userEmail.size() < 150));
     }
 
     // ===============================================================

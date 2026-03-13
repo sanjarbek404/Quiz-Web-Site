@@ -145,7 +145,9 @@ const Quiz: React.FC = () => {
         quizId: quiz.id,
         score: calculatedScore,
         percentage,
-        completedAt: new Date().toISOString()
+        completedAt: new Date().toISOString(),
+        userName: userData.name,
+        userEmail: userData.email
       });
     } catch (error) {
       console.error('Error saving result:', error);
