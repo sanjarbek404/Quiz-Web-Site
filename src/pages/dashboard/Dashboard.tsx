@@ -13,14 +13,15 @@ const Dashboard: React.FC = () => {
   const { t } = useTranslation();
   const { theme, quizzes, results, setQuizzes, setResults } = useStore();
   const { userData } = useAuth();
-  const [loading, setLoading] = useState(!quizzes.length || !results.length);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (!userData) {
-        setLoading(false);
+      // Agar userData hali kelmagan bo'lsa, kutamiz
+      if (userData === null) {
         return;
       }
+      
       try {
         const [fetchedQuizzes, fetchedResults] = await Promise.all([
           getQuizzes(),
@@ -37,18 +38,8 @@ const Dashboard: React.FC = () => {
     fetchData();
   }, [userData, setQuizzes, setResults]);
 
-  const totalQuizzes = results.length;
-  const bestScore = results.length > 0 ? Math.max(...results.map(r => r.score)) : 0;
-  const averageScore = results.length > 0 ? Math.round(results.reduce((acc, curr) => acc + curr.percentage, 0) / results.length) : 0;
-
-  // Prepare chart data
-  const chartData = [...results].reverse().map((result, index) => ({
-    name: `Test ${index + 1}`,
-    score: result.percentage,
-    date: format(new Date(result.completedAt), 'MMM dd')
-  }));
-
-  if (loading && !quizzes.length) {
+  // Agar userData hali null bo'lsa va biz hali loading holatida bo'lsak
+  if (loading || userData === null) {
     return (
       <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center gap-6">
         <div className="relative">
@@ -63,7 +54,7 @@ const Dashboard: React.FC = () => {
     );
   }
 
-  if (!userData) {
+  if (userData === undefined) {
     return (
       <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center p-6 text-center">
         <div className="w-24 h-24 rounded-[2.5rem] bg-amber-500/10 text-amber-500 flex items-center justify-center mb-8 shadow-xl shadow-amber-500/10 rotate-3">
@@ -82,6 +73,17 @@ const Dashboard: React.FC = () => {
       </div>
     );
   }
+
+  const totalQuizzes = results.length;
+  const bestScore = results.length > 0 ? Math.max(...results.map(r => r.score)) : 0;
+  const averageScore = results.length > 0 ? Math.round(results.reduce((acc, curr) => acc + curr.percentage, 0) / results.length) : 0;
+
+  // Prepare chart data
+  const chartData = [...results].reverse().map((result, index) => ({
+    name: `Test ${index + 1}`,
+    score: result.percentage,
+    date: format(new Date(result.completedAt), 'MMM dd')
+  }));
 
   return (
     <div className="relative min-h-[calc(100vh-4rem)] overflow-hidden">

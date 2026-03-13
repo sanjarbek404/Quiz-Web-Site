@@ -52,13 +52,17 @@ const Login: React.FC = () => {
         await setDoc(doc(db, 'users', user.uid), {
           id: user.uid,
           name: user.displayName || 'User',
-          email: user.email,
+          email: user.email || '',
           role,
           createdAt: new Date().toISOString()
         });
       }
 
-      navigate('/dashboard');
+      // Kichik pauza - AuthContext onSnapshot orqali ma'lumotni olib ulgurishi uchun
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 500);
+      
     } catch (err: any) {
       if (err.code === 'auth/popup-blocked') {
         setError('Popup blocked by browser. Please allow popups for this site.');
