@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Главная",
+    "dashboard": "Панель управления",
+    "leaderboard": "Рейтинг",
+    "admin": "Админ-панель",
+    "login": "Войти",
+    "register": "Регистрация",
+    "logout": "Выйти"
+  },
+  "hero": {
+    "title": "Освойте IT-навыки с интерактивными тестами",
+    "subtitle": "Проверьте свои знания в HTML, CSS, JavaScript, React и других областях. Отслеживайте свой прогресс и соревнуйтесь в глобальном рейтинге.",
+    "getStarted": "Начать",
+    "viewLeaderboard": "Посмотреть рейтинг"
+  },
+  "features": {
+    "title": "Возможности платформы",
+    "timer": "Тесты на время",
+    "progress": "Отслеживание прогресса",
+    "analytics": "Аналитика результатов",
+    "categories": "Множество категорий",
+    "leaderboards": "Глобальные рейтинги"
+  },
+  "howItWorks": {
+    "title": "Как это работает",
+    "step1": "Зарегистрируйте аккаунт",
+    "step2": "Выберите категорию",
+    "step3": "Ответьте на вопросы",
+    "step4": "Получите подробные результаты"
+  },
+  "categories": {
+    "title": "Категории тестов",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "typescript": "TypeScript",
+    "cybersecurity": "Кибербезопасность",
+    "networking": "Сети",
+    "algorithms": "Алгоритмы"
+  },
+  "auth": {
+    "loginTitle": "С возвращением",
+    "registerTitle": "Создать аккаунт",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "name": "Полное имя",
+    "submitLogin": "Войти",
+    "submitRegister": "Зарегистрироваться",
+    "noAccount": "Нет аккаунта?",
+    "hasAccount": "Уже есть аккаунт?",
+    "error": "Ошибка авторизации. Пожалуйста, попробуйте снова.",
+    "googleSignIn": "Войти через Google",
+    "googleSignUp": "Зарегистрироваться через Google",
+    "enableEmailAuth": "Авторизация по Email/Паролю не включена в Firebase Console. Пожалуйста, включите её или используйте Google.",
+    "or": "или продолжить через"
+  },
+  "dashboard": {
+    "welcome": "С возвращением, {{name}}",
+    "stats": "Статистика",
+    "totalQuizzes": "Всего пройдено тестов",
+    "bestScore": "Лучший результат",
+    "averageScore": "Средний результат",
+    "availableQuizzes": "Доступные тесты",
+    "recentActivity": "Недавняя активность",
+    "startQuiz": "Начать тест",
+    "difficulty": "Сложность",
+    "timeLimit": "Лимит времени",
+    "minutes": "мин"
+  },
+  "quiz": {
+    "question": "Вопрос",
+    "of": "из",
+    "next": "Следующий вопрос",
+    "finish": "Завершить тест",
+    "timeRemaining": "Осталось времени",
+    "results": "Результаты теста",
+    "score": "Общий балл",
+    "correct": "Правильные ответы",
+    "incorrect": "Неправильные ответы",
+    "percentage": "Процент",
+    "performance": "Результат",
+    "retry": "Повторить тест",
+    "backToDashboard": "Вернуться в панель"
+  },
+  "leaderboard": {
+    "title": "Глобальный рейтинг",
+    "rank": "Место",
+    "user": "Пользователь",
+    "quiz": "Тест",
+    "score": "Баллы",
+    "date": "Дата"
+  },
+  "admin": {
+    "dashboard": "Админ-панель",
+    "manageQuizzes": "Управление тестами",
+    "createQuiz": "Создать новый тест",
+    "editQuiz": "Редактировать тест",
+    "deleteQuiz": "Удалить тест",
+    "manageQuestions": "Управление вопросами",
+    "addQuestion": "Добавить вопрос",
+    "users": "Статистика пользователей",
+    "title": "Название",
+    "description": "Описание",
+    "category": "Категория",
+    "difficulty": "Сложность",
+    "timeLimit": "Лимит времени (мин)",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "actions": "Действия"
+  }
+}

@@ -1,0 +1,170 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {userId}
+    // Fields:
+    //   - id: string (required)
+    //   - name: string (required, < 100 chars)
+    //   - email: string (required, < 150 chars)
+    //   - role: string (required, 'user' or 'admin')
+    //   - createdAt: string (required)
+    //
+    // Collection: quizzes
+    // Document ID: {quizId}
+    // Fields:
+    //   - id: string (required)
+    //   - title: string (required, < 150 chars)
+    //   - description: string (required, < 1000 chars)
+    //   - category: string (required, < 50 chars)
+    //   - difficulty: string (required, 'easy', 'medium', 'hard')
+    //   - timeLimit: number (required, > 0)
+    //   - createdAt: string (required)
+    //
+    // Collection: questions
+    // Document ID: {questionId}
+    // Fields:
+    //   - id: string (required)
+    //   - quizId: string (required)
+    //   - question: string (required, < 1000 chars)
+    //   - options: list (required, size 4, strings < 200 chars)
+    //   - correctAnswer: string (required, < 200 chars)
+    //
+    // Collection: results
+    // Document ID: {resultId}
+    // Fields:
+    //   - id: string (required)
+    //   - userId: string (required)
+    //   - quizId: string (required)
+    //   - score: number (required, >= 0)
+    //   - percentage: number (required, >= 0, <= 100)
+    //   - completedAt: string (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin') ||
+        (request.auth.token.email == "sanjarbekotabekov010@gmail.com")
+      );
+    }
+
+    function hasOnlyAllowedFields(allowedFields) {
+      return request.resource.data.keys().hasOnly(allowedFields);
+    }
+
+    function hasRequiredFields(requiredFields) {
+      return request.resource.data.keys().hasAll(requiredFields);
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    // ===============================================================
+    // Domain Validators
+    // ===============================================================
+    function isValidUser() {
+      let data = request.resource.data;
+      return hasOnlyAllowedFields(['id', 'name', 'email', 'role', 'createdAt']) &&
+             hasRequiredFields(['id', 'name', 'email', 'role', 'createdAt']) &&
+             data.id is string && data.id.size() > 0 && data.id.size() < 100 &&
+             data.name is string && data.name.size() > 0 && data.name.size() < 100 &&
+             isValidEmail(data.email) && data.email.size() < 150 &&
+             data.role in ['user', 'admin'] &&
+             data.createdAt is string && data.createdAt.size() < 50;
+    }
+
+    function isValidQuiz() {
+      let data = request.resource.data;
+      return hasOnlyAllowedFields(['id', 'title', 'description', 'category', 'difficulty', 'timeLimit', 'createdAt']) &&
+             hasRequiredFields(['id', 'title', 'description', 'category', 'difficulty', 'timeLimit', 'createdAt']) &&
+             data.id is string && data.id.size() > 0 && data.id.size() < 100 &&
+             data.title is string && data.title.size() > 0 && data.title.size() < 150 &&
+             data.description is string && data.description.size() < 1000 &&
+             data.category is string && data.category.size() > 0 && data.category.size() < 50 &&
+             data.difficulty in ['easy', 'medium', 'hard'] &&
+             data.timeLimit is number && data.timeLimit > 0 && data.timeLimit <= 180 &&
+             data.createdAt is string && data.createdAt.size() < 50;
+    }
+
+    function isValidQuestion() {
+      let data = request.resource.data;
+      return hasOnlyAllowedFields(['id', 'quizId', 'question', 'options', 'correctAnswer']) &&
+             hasRequiredFields(['id', 'quizId', 'question', 'options', 'correctAnswer']) &&
+             data.id is string && data.id.size() > 0 && data.id.size() < 100 &&
+             data.quizId is string && data.quizId.size() > 0 && data.quizId.size() < 100 &&
+             data.question is string && data.question.size() > 0 && data.question.size() < 1000 &&
+             data.options is list && data.options.size() == 4 &&
+             data.options[0] is string && data.options[0].size() < 200 &&
+             data.options[1] is string && data.options[1].size() < 200 &&
+             data.options[2] is string && data.options[2].size() < 200 &&
+             data.options[3] is string && data.options[3].size() < 200 &&
+             data.correctAnswer is string && data.correctAnswer.size() < 200;
+    }
+
+    function isValidResult() {
+      let data = request.resource.data;
+      return hasOnlyAllowedFields(['id', 'userId', 'quizId', 'score', 'percentage', 'completedAt']) &&
+             hasRequiredFields(['id', 'userId', 'quizId', 'score', 'percentage', 'completedAt']) &&
+             data.id is string && data.id.size() > 0 && data.id.size() < 100 &&
+             data.userId is string && data.userId.size() > 0 && data.userId.size() < 100 &&
+             data.quizId is string && data.quizId.size() > 0 && data.quizId.size() < 100 &&
+             data.score is number && data.score >= 0 &&
+             data.percentage is number && data.percentage >= 0 && data.percentage <= 100 &&
+             data.completedAt is string && data.completedAt.size() < 50;
+    }
+
+    // ===============================================================
+    // Collection Rules
+    // ===============================================================
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create: if isAuthenticated() && isOwner(userId) && isValidUser() &&
+                    (request.resource.data.role == 'user' || isAdmin());
+      allow update: if isAuthenticated() && isValidUser() &&
+                    ((isOwner(userId) && request.resource.data.role == resource.data.role && request.resource.data.createdAt == resource.data.createdAt) || isAdmin());
+      allow delete: if isAdmin();
+    }
+
+    match /quizzes/{quizId} {
+      allow read: if true; // Public can see available quizzes
+      allow create: if isAdmin() && isValidQuiz();
+      allow update: if isAdmin() && isValidQuiz() && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isAdmin();
+    }
+
+    match /questions/{questionId} {
+      allow read: if isAuthenticated(); // Only authenticated users can see questions
+      allow create: if isAdmin() && isValidQuestion();
+      allow update: if isAdmin() && isValidQuestion();
+      allow delete: if isAdmin();
+    }
+
+    match /results/{resultId} {
+      allow read: if true; // Public can see results for leaderboard
+      allow create: if isAuthenticated() && isOwner(request.resource.data.userId) && isValidResult();
+      allow update: if isAdmin() && isValidResult();
+      allow delete: if isAdmin();
+    }
+  }
+}

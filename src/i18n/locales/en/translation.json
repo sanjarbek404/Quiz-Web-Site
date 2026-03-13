@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "leaderboard": "Leaderboard",
+    "admin": "Admin Panel",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "hero": {
+    "title": "Master IT Skills with Interactive Quizzes",
+    "subtitle": "Test your knowledge in HTML, CSS, JavaScript, React, and more. Track your progress and compete on the global leaderboard.",
+    "getStarted": "Get Started",
+    "viewLeaderboard": "View Leaderboard"
+  },
+  "features": {
+    "title": "Platform Features",
+    "timer": "Timer Based Quizzes",
+    "progress": "Progress Tracking",
+    "analytics": "Result Analytics",
+    "categories": "Multiple Categories",
+    "leaderboards": "Global Leaderboards"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "step1": "Register an account",
+    "step2": "Choose a category",
+    "step3": "Complete questions",
+    "step4": "Get detailed results"
+  },
+  "categories": {
+    "title": "Quiz Categories",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "typescript": "TypeScript",
+    "cybersecurity": "Cybersecurity",
+    "networking": "Networking",
+    "algorithms": "Algorithms"
+  },
+  "auth": {
+    "loginTitle": "Welcome Back",
+    "registerTitle": "Create an Account",
+    "email": "Email Address",
+    "password": "Password",
+    "name": "Full Name",
+    "submitLogin": "Sign In",
+    "submitRegister": "Sign Up",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "error": "Authentication failed. Please try again.",
+    "googleSignIn": "Sign in with Google",
+    "googleSignUp": "Sign up with Google",
+    "enableEmailAuth": "Email/Password auth is not enabled in Firebase Console. Please enable it or use Google Sign-In.",
+    "or": "or continue with"
+  },
+  "dashboard": {
+    "welcome": "Welcome back, {{name}}",
+    "stats": "Statistics Overview",
+    "totalQuizzes": "Total Quizzes Taken",
+    "bestScore": "Best Score",
+    "averageScore": "Average Score",
+    "availableQuizzes": "Available Quizzes",
+    "recentActivity": "Recent Activity",
+    "startQuiz": "Start Quiz",
+    "difficulty": "Difficulty",
+    "timeLimit": "Time Limit",
+    "minutes": "min"
+  },
+  "quiz": {
+    "question": "Question",
+    "of": "of",
+    "next": "Next Question",
+    "finish": "Finish Quiz",
+    "timeRemaining": "Time Remaining",
+    "results": "Quiz Results",
+    "score": "Total Score",
+    "correct": "Correct Answers",
+    "incorrect": "Incorrect Answers",
+    "percentage": "Percentage",
+    "performance": "Performance",
+    "retry": "Retry Quiz",
+    "backToDashboard": "Back to Dashboard"
+  },
+  "leaderboard": {
+    "title": "Global Leaderboard",
+    "rank": "Rank",
+    "user": "User",
+    "quiz": "Quiz",
+    "score": "Score",
+    "date": "Date"
+  },
+  "admin": {
+    "dashboard": "Admin Dashboard",
+    "manageQuizzes": "Manage Quizzes",
+    "createQuiz": "Create New Quiz",
+    "editQuiz": "Edit Quiz",
+    "deleteQuiz": "Delete Quiz",
+    "manageQuestions": "Manage Questions",
+    "addQuestion": "Add Question",
+    "users": "User Statistics",
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "difficulty": "Difficulty",
+    "timeLimit": "Time Limit (min)",
+    "save": "Save",
+    "cancel": "Cancel",
+    "actions": "Actions"
+  }
+}

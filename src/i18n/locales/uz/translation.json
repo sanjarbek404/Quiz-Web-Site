@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Bosh sahifa",
+    "dashboard": "Boshqaruv paneli",
+    "leaderboard": "Reyting",
+    "admin": "Admin paneli",
+    "login": "Kirish",
+    "register": "Ro'yxatdan o'tish",
+    "logout": "Chiqish"
+  },
+  "hero": {
+    "title": "Interaktiv testlar orqali IT ko'nikmalarini egallang",
+    "subtitle": "HTML, CSS, JavaScript, React va boshqa yo'nalishlarda bilimlaringizni sinab ko'ring. Yutuqlaringizni kuzating va global reytingda bellashing.",
+    "getStarted": "Boshlash",
+    "viewLeaderboard": "Reytingni ko'rish"
+  },
+  "features": {
+    "title": "Platforma imkoniyatlari",
+    "timer": "Vaqt bilan cheklangan testlar",
+    "progress": "Natijalarni kuzatish",
+    "analytics": "Natijalar tahlili",
+    "categories": "Ko'plab kategoriyalar",
+    "leaderboards": "Global reytinglar"
+  },
+  "howItWorks": {
+    "title": "Qanday ishlaydi",
+    "step1": "Ro'yxatdan o'ting",
+    "step2": "Kategoriyani tanlang",
+    "step3": "Savollarga javob bering",
+    "step4": "Batafsil natijalarni oling"
+  },
+  "categories": {
+    "title": "Test kategoriyalari",
+    "html": "HTML",
+    "css": "CSS",
+    "javascript": "JavaScript",
+    "react": "React",
+    "typescript": "TypeScript",
+    "cybersecurity": "Kiberxavfsizlik",
+    "networking": "Tarmoqlar",
+    "algorithms": "Algoritmlar"
+  },
+  "auth": {
+    "loginTitle": "Xush kelibsiz",
+    "registerTitle": "Hisob yaratish",
+    "email": "Elektron pochta",
+    "password": "Parol",
+    "name": "To'liq ism",
+    "submitLogin": "Tizimga kirish",
+    "submitRegister": "Ro'yxatdan o'tish",
+    "noAccount": "Hisobingiz yo'qmi?",
+    "hasAccount": "Allaqachon hisobingiz bormi?",
+    "error": "Avtorizatsiya xatosi. Iltimos, qayta urinib ko'ring.",
+    "googleSignIn": "Google orqali kirish",
+    "googleSignUp": "Google orqali ro'yxatdan o'tish",
+    "enableEmailAuth": "Email/Parol orqali kirish Firebase konsolida yoqilmagan. Iltimos, uni yoqing yoki Google orqali kiring.",
+    "or": "yoki quyidagilar orqali davom eting"
+  },
+  "dashboard": {
+    "welcome": "Xush kelibsiz, {{name}}",
+    "stats": "Statistika",
+    "totalQuizzes": "Jami ishlangan testlar",
+    "bestScore": "Eng yaxshi natija",
+    "averageScore": "O'rtacha natija",
+    "availableQuizzes": "Mavjud testlar",
+    "recentActivity": "So'nggi faollik",
+    "startQuiz": "Testni boshlash",
+    "difficulty": "Qiyinlik",
+    "timeLimit": "Vaqt chegarasi",
+    "minutes": "daq"
+  },
+  "quiz": {
+    "question": "Savol",
+    "of": "dan",
+    "next": "Keyingi savol",
+    "finish": "Testni yakunlash",
+    "timeRemaining": "Qolgan vaqt",
+    "results": "Test natijalari",
+    "score": "Umumiy ball",
+    "correct": "To'g'ri javoblar",
+    "incorrect": "Noto'g'ri javoblar",
+    "percentage": "Foiz",
+    "performance": "Natija",
+    "retry": "Qayta urinish",
+    "backToDashboard": "Boshqaruv paneliga qaytish"
+  },
+  "leaderboard": {
+    "title": "Global reyting",
+    "rank": "O'rin",
+    "user": "Foydalanuvchi",
+    "quiz": "Test",
+    "score": "Ball",
+    "date": "Sana"
+  },
+  "admin": {
+    "dashboard": "Admin boshqaruv paneli",
+    "manageQuizzes": "Testlarni boshqarish",
+    "createQuiz": "Yangi test yaratish",
+    "editQuiz": "Testni tahrirlash",
+    "deleteQuiz": "Testni o'chirish",
+    "manageQuestions": "Savollarni boshqarish",
+    "addQuestion": "Savol qo'shish",
+    "users": "Foydalanuvchilar statistikasi",
+    "title": "Sarlavha",
+    "description": "Tavsif",
+    "category": "Kategoriya",
+    "difficulty": "Qiyinlik",
+    "timeLimit": "Vaqt chegarasi (daq)",
+    "save": "Saqlash",
+    "cancel": "Bekor qilish",
+    "actions": "Harakatlar"
+  }
+}
